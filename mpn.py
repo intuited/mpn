@@ -1,8 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-#     $Id: mpn.py 10 2007-04-09 13:35:36Z olivier $
-#     Copyright 2007 Olivier Schwander <olivier.schwander@ens-lyon.org>
+#     Copyright 2007-2008 Olivier Schwander <olivier.schwander@ens-lyon.org>
 
 #     This program is free software; you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
@@ -21,7 +20,7 @@
 # Requirements:
 # You will need pygtk, python-notify, python-mpdclient and python-gtk2
 
-# Use:
+# Usage:
 # Simply launch ./mpn.py
 
 
