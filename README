@@ -28,7 +28,7 @@ clients.
 Prérequis
 ---------
 
-Les modules python suivants sont nécessaires:
+Les modules python suivants sont nécessaires :
 
 *  python-notify,
 *  python-mpd,
@@ -50,7 +50,8 @@ Licence
 -------
 
 Mpnotifier est un logiciel libre, diffusé sous licence GPLv2.
-Copyright 2007-2008 Olivier Schwander ‹olivier.SPAMschwander aT
+
+Copyright 2007-2009 Olivier Schwander ‹olivier.SPAMschwander aT
 ens-lyon DoT org›
 
 Adapté pour le nouveau module python-mpd par Walther Maldonado
