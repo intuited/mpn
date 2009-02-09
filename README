@@ -1,44 +1,54 @@
-# MPNotifier
+MPNotifier
+==========
 
 Description
-MPNotifier est un notificateur pour [MPD](http://www.musicpd.org).
+-----------
 
-Son but est d'afficher une notification lors de chaque changement
-de morceau sur le serveur MPD.
+MPNotifier est un client légér pour [MPD](http://www.musicpd.org)
+affichant des popups de notification.
+
+Son but est d'afficher un message contenant le titre et l'artiste à
+chaque changement sur le serveur MPD.
 
 Il utilise la libnotify par l'intermédiaire des bindings python.
 
-## Pourquoi ?
+Pourquoi ?
+----------
 
-Il existe ce genre de notifications mais elles sont faîtes en
-général par un client plus évolué, par exemple
-[Sonata](http://sonata.berlios.de)
-Par contre cette fonctionnalité est impossible à utiliser si vous
-préférez les clients en mode texte comme
-[ncmpc](http://hem.bredband.net/kaw/ncmpc/).
+Ce genre de notifications est classique pour les clients lourds
+(comprenez en mode graphique), comme par exemple
+[Sonata](http://sonata.berlios.de) ou
+[Ario](http://ario-player.sourceforge.net).
 
-Mpnotifier fonctionne en arrière-plan n'a besoin d'aucun autre
-client.
+D'autres client sont plus légers, comme
+[ncmpc](http://hem.bredband.net/kaw/ncmpc/) mais ne supportent pas ce
+genre de notifications. L'objectif de Mpnotifier est de compléter ces
+clients.
 
-## Prérequis
+Prérequis
+---------
 
 Les modules python suivants sont nécessaires:
-pygtk,
-python-notify,
-python-mpdclient,
-python-gtk2.
-## Téléchargement
+
+*  pygtk,
+*  python-notify,
+*  python-mpdclient,
+*  python-gtk2.
+
+Téléchargement
+--------------
 
 [Directement](http://chadok.info/darcs/mpn/mpn.py)
 
 [Dépôt Darcs](http://chadok.info/darcs/mpn)
 
-[Parcourir le dépôt Darcs](http://chadok.info/darcs/cgi-bin/darcsweb.cgi?r=mpn;a=summary)
-
-## Aperçu
+Aperçu
+------
 
 [![Capture d'écran](capture.png)](capture.png)
-## Licence
+
+Licence
+-------
 
 Mpnotifier est un logiciel libre, diffusé sous licence GPLv2.
 Copyright 2007-2008 Olivier Schwander ‹olivier.SPAMschwander aT
