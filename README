@@ -53,5 +53,6 @@ Mpnotifier est un logiciel libre, diffusé sous licence GPLv2.
 Copyright 2007-2008 Olivier Schwander ‹olivier.SPAMschwander aT
 ens-lyon DoT org›
 
-
+Adapté pour le nouveau module python-mpd par Walther Maldonado
+<walther.md g mailcom>, avec quelques nouvelles fonctionnalités.
 

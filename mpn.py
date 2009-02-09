@@ -21,7 +21,7 @@
 # You will need pygtk, python-notify, python-mpdclient and python-gtk2
 
 # Usage:
-# Simply launch ./mpn.py
+# Simply launch ./mpn.py or ./mpn.py -h for usage help
 
 
 """Simple libnotify notifier for mpd"""
@@ -31,7 +31,7 @@ from optparse import OptionParser
 
 import gobject
 import gtk
-import mpdclient2
+import mpd
 import pynotify
 
 def convert_time(raw):
@@ -70,7 +70,7 @@ class Notifier:
 
     def get_time(self):
         """Get current time and total lentght of the current song"""
-        time = self.status.time
+        time = self.status["time"]
         now, length = [int(c) for c in time.split(':')]
         now_time = convert_time(now)
         length_time = convert_time(length)
@@ -82,9 +82,9 @@ class Notifier:
     def get_title(self):
         """Get the current song title"""
         try:
-            title = self.current.title
-        except AttributeError:
-            title = "????"
+            title = self.current["title"]
+        except KeyError:
+            title = "???"
             print "<Pas de titre trouvé>"
         if self.debug:
             print "Titre : " + title
@@ -93,9 +93,9 @@ class Notifier:
     def get_album(self):
         """Get the current song album"""
         try:
-            album = self.current.album
-        except AttributeError:
-            album = "????"
+            album = self.current["album"]
+        except KeyError:
+            album = "???"
             print "<Pas d'album trouvé>"
         if self.debug:
             print "Album : " + album
@@ -104,9 +104,9 @@ class Notifier:
     def get_artist(self):
         """Get the current song artist"""
         try:
-            artist = self.current.artist
-        except AttributeError:
-            artist = "????"
+            artist = self.current["artist"]
+        except KeyError:
+            artist = "???"
             print "<Pas d'artiste trouvé>"
         if self.debug:
             print "Artiste : " + artist
@@ -117,7 +117,7 @@ class Notifier:
         self.status = self.mpd.status()
 
         # only if there is a song currently playing
-        if not self.status.state in ['play', 'pause']:
+        if not self.status["state"] in ['play', 'pause']:
             if self.debug:
                 print "Pas de lecture en cours sur le serveur " + self.host
             return True
@@ -162,8 +162,9 @@ class Notifier:
         self.host = self.get_host()
 
         try:
-            self.mpd = mpdclient2.connect()
-        except mpdclient2.socket.error:
+				self.mpd = mpd.MPDClient();
+				self.mpd.connect(self.host, 6600);
+        except mpd.socket.error:
             print "Impossible de se connecter au serveur " + self.host
             sys.exit(1)
 
@@ -173,18 +174,23 @@ if __name__ == "__main__":
     # initializate the argument parser
     PARSER = OptionParser()
 
-    # debug mode
+    # help/debug mode
     PARSER.set_defaults(debug=False)
-    PARSER.add_option("--debug", action="store_true", dest="debug")
+    PARSER.add_option("--debug", action="store_true", dest="debug", help="Turn on debugging information")
 
     # does mpn will fork ?
-    PARSER.add_option("--nodaemon", action="store_false", dest="fork")
-    PARSER.add_option("-d", "--daemon", action="store_true", dest="fork")
-    PARSER.set_defaults(fork=True)
+    PARSER.add_option("-d", "--daemon", action="store_true", dest="fork", help="Fork into the background")
+    PARSER.add_option("-n", "--nodaemon", action="store_false", dest="fork", help="Do not daemonize into background (default)")
+    PARSER.set_defaults(fork=False)
 
     # how many time the notice will be shown
     PARSER.set_defaults(timeout=3)
-    PARSER.add_option("-t", "--timeout", type="int", action="store", dest="timeout")
+    PARSER.add_option("-t", "--timeout", type="int", action="store", dest="timeout", help="Notification timeout in secs")
+
+    # whether to print updates on all song changes
+    PARSER.add_option("-o", "--once", action="store_false", dest="repeat", help="Notify once and exit")
+    PARSER.set_defaults(repeat=True)
+
 
     # parse the commandline
     (OPTIONS, ARGS) = PARSER.parse_args()
@@ -198,5 +204,8 @@ if __name__ == "__main__":
             sys.exit(0)
 
     # run the notifier
-    MPN.run()
-    gtk.main()
+    if OPTIONS.repeat:
+        MPN.run()
+        gtk.main()
+    else:
+        MPN.notify()
