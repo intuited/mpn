@@ -30,9 +30,8 @@ Prérequis
 
 Les modules python suivants sont nécessaires:
 
-*  pygtk,
 *  python-notify,
-*  python-mpdclient,
+*  python-mpd,
 *  python-gtk2.
 
 Téléchargement
