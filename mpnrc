@@ -5,9 +5,9 @@ persist: True
 timeout: 3
 keys: True
 icon: gnome-mime-audio
-title_format: >-
+title: >-
   %t
-body_format: >-
+body: >-
   <b>%b</b>
   <i>%a</i>
 
