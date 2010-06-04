@@ -4,56 +4,54 @@ MPNotifier
 Description
 -----------
 
-MPNotifier est un client légér pour [MPD](http://www.musicpd.org)
-affichant des popups de notification.
+MPNotifier is a lightweight client for [MPD](http://www.musicpd.org)
+displaying a popup notification each time a new song is played by the
+server. This kind of notification is usual for most of graphical MPD
+clients but if you prefer to use a text-mode client like ncmpc, you need
+to use a third-party tool like MPNotifier.
 
-Son but est d'afficher un message contenant le titre et l'artiste à
-chaque changement sur le serveur MPD.
+Prerequisite
+------------
 
-Il utilise la libnotify par l'intermédiaire des bindings python.
-
-Pourquoi ?
-----------
-
-Ce genre de notifications est classique pour les clients lourds
-(comprenez en mode graphique), comme par exemple
-[Sonata](http://sonata.berlios.de) ou
-[Ario](http://ario-player.sourceforge.net).
-
-D'autres client sont plus légers, comme
-[ncmpc](http://hem.bredband.net/kaw/ncmpc/) mais ne supportent pas ce
-genre de notifications. L'objectif de Mpnotifier est de compléter ces
-clients.
-
-Prérequis
----------
-
-Les modules python suivants sont nécessaires :
+The following python packages are needed:
 
 *  python-notify,
 *  python-mpd,
 *  python-gtk2.
 
-Téléchargement
---------------
+Configuration
+-------------
 
-[Directement](http://chadok.info/darcs/mpn/mpn.py)
+MPNotifier will load the file `~/.mpnrc`, which a YAML file like this one:
 
-[Dépôt Darcs](http://chadok.info/darcs/mpn)
+   daemon: False
+   once: False
+   debug: False
+   persist: True
+   timeout: 3
+   keys: True
+   icon: gnome-mime-audio
+   title: >-
+     %t
+   body: >-
+     <b>%b</b>
+     <i>%a</i>
 
-Aperçu
-------
+The fields have the same names than the long form of the command line
+arguments, see `mpn -h` for explanation.
 
-[![Capture d'écran](capture.png)](capture.png)
+Download
+--------
+
+[Directly](http://chadok.info/mpn/mpn-1.0.tar.gz)
+
+[Darcs repository](http://chadok.info/darcs/mpn)
 
 Licence
 -------
 
-Mpnotifier est un logiciel libre, diffusé sous licence GPLv2.
+MPNotifier is free software, released under the term of the GPLv2+.
 
-Copyright 2007-2009 Olivier Schwander ‹olivier.SPAMschwander aT
-ens-lyon DoT org›
-
-Adapté pour le nouveau module python-mpd par Walther Maldonado
-<walther.md g mailcom>, avec quelques nouvelles fonctionnalités.
+Copyright 2007-2010 Olivier Schwander ‹olivier.schwander@chadok.info>
+Copyright 2009-2010 Walther Maldonado <walther.md@gmail.com>
 
