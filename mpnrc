@@ -1,0 +1,13 @@
+daemon: False
+once: False
+debug: False
+persist: True
+timeout: 3
+keys: True
+icon: gnome-mime-audio
+title_format: >-
+  %t
+body_format: >-
+  <b>%b</b>
+  <i>%a</i>
+
