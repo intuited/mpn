@@ -297,36 +297,36 @@ class Notifier:
 
 if __name__ == "__main__":
 	# initializate the argument parser
-	PARSER = OptionParser()
+	parser = OptionParser()
         
 	# help/debug mode
-	PARSER.add_option("--debug", action="store_true", dest="debug",
+	parser.add_option("--debug", action="store_true", dest="debug",
 		default=False, help="Turn on debugging information")
         
 	# does mpn will fork ?
-	PARSER.add_option("-d", "--daemon", action="store_true", dest="fork",
+	parser.add_option("-d", "--daemon", action="store_true", dest="fork",
 		default=False, help="Fork into the background")
         
-	PARSER.add_option("-p", "--persist", action="store_true", dest="persist",
+	parser.add_option("-p", "--persist", action="store_true", dest="persist",
 		default=False, help="Do not exit when connection fails")
         
 	# how many time the notice will be shown
-	PARSER.add_option("-t", "--timeout", type="int", dest="timeout", default=3,
+	parser.add_option("-t", "--timeout", type="int", dest="timeout", default=3,
 		help="Notification timeout in secs (use 0 to disable)")
         
 	# display next/prev keys on popup dialog
-	PARSER.add_option("-k", "--keys", action="store_true", dest="keys",
+	parser.add_option("-k", "--keys", action="store_true", dest="keys",
 		default=False, help="Add Prev/Next buttons to notify window")
         
 	# whether to print updates on all song changes
-	PARSER.add_option("-o", "--once", action="store_true", dest="once",
+	parser.add_option("-o", "--once", action="store_true", dest="once",
 		default=False, help="Notify once and exit")
         
-	PARSER.add_option("-i", "--icon", dest="default_icon", default=default_icon,
+	parser.add_option("-i", "--icon", dest="default_icon", default=default_icon,
 		help="Icon URI/name (default: %default)")
         
 	# Format strings
-	GROUP = OptionGroup(PARSER, "Format related options for the notify display",
+	group = OptionGroup(parser, "Format related options for the notify display",
 		"Supported wildcards:"
 		" %t title /"
 		" %a artist /"
@@ -339,29 +339,29 @@ if __name__ == "__main__":
 		" <b> </b> bold text /"
 		" <br> line break")
         
-	GROUP.add_option("-F", "--header", dest="title_format", default=format_title,
+	group.add_option("-F", "--header", dest="title_format", default=format_title,
 		help="Format for the notify header (default: %default)")
         
-	GROUP.add_option("-f", "--format", dest="body_format", default=format_body,
+	group.add_option("-f", "--format", dest="body_format", default=format_body,
 		help="Format for the notify body (default: %default)")
         
-	PARSER.add_option_group(GROUP)
+	parser.add_option_group(group)
         
 	# parse the commandline
-	(OPTIONS, ARGS) = PARSER.parse_args()
+	(options, _) = parser.parse_args()
         
 	# initializate the notifier
 	if not pynotify.init('mpn'):
 		print "Failed to initialize pynotify module"
 		sys.exit(1)
         
-	MPN = Notifier(debug=OPTIONS.debug, notify_timeout=OPTIONS.timeout,
-		show_keys=OPTIONS.keys, persist=OPTIONS.persist, once=OPTIONS.once, 
-		title_format=OPTIONS.title_format, body_format=OPTIONS.body_format,
-		icon=OPTIONS.default_icon)
+	MPN = Notifier(debug=options.debug, notify_timeout=options.timeout,
+		show_keys=options.keys, persist=options.persist, once=options.once,
+		title_format=options.title_format, body_format=options.body_format,
+		icon=options.default_icon)
         
 	# fork if necessary
-	if OPTIONS.fork and not OPTIONS.debug:
+	if options.fork and not options.debug:
 		if os.fork() != 0:
 			sys.exit(0)
         
@@ -369,7 +369,7 @@ if __name__ == "__main__":
 	try:
 		MPN.run()
 		# We only need the main loop when iterating or if keys are enabled
-		if OPTIONS.keys or not OPTIONS.once:
+		if options.keys or not options.once:
 			gtk.main()
 	except KeyboardInterrupt:
 		MPN.close()
