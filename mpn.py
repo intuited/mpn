@@ -1,7 +1,8 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-#     Copyright 2007-2008 Olivier Schwander <olivier.schwander@ens-lyon.org>
+#     Copyright 2007-2010 Olivier Schwander <olivier.schwander@ens-lyon.org>
+#     Copyright 2009-2010 Walther Maldonado <walther.md@gmail.com>
 
 #     This program is free software; you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
