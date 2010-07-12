@@ -95,6 +95,7 @@ class Notifier:
 	re_a = re.compile('(%a)', re.S) #Artist
 	re_b = re.compile('(%b)', re.S) #alBum
 	re_d = re.compile('(%d)', re.S) #song Duration
+	re_e = re.compile('(%e)', re.S) #Elapsed time
 	re_f = re.compile('(%f)', re.S) #File
 	re_n = re.compile('(%n)', re.S) #track Number
 	re_p = re.compile('(%p)', re.S) #playlist Position
@@ -225,6 +226,7 @@ class Notifier:
 			title = self.re_t.sub(self.get_title(), title)
 			title = self.re_f.sub(self.get_file(), title)
 			title = self.re_d.sub(self.get_time(), title)
+			title = self.re_e.sub(self.get_time(elapsed=True), title)
 			title = self.re_a.sub(self.get_tag('artist'), title)
 			title = self.re_b.sub(self.get_tag('album'), title)
 			title = self.re_n.sub(self.get_tag('track'), title)
@@ -233,6 +235,7 @@ class Notifier:
 			body = self.re_t.sub(self.get_title(True), body)
 			body = self.re_f.sub(self.get_file(True), body)
 			body = self.re_d.sub(self.get_time(), body)
+			body = self.re_e.sub(self.get_time(elapsed=True), body)
 			body = self.re_a.sub(self.get_tag('artist', True), body)
 			body = self.re_b.sub(self.get_tag('album', True), body)
 			body = self.re_n.sub(self.get_tag('track'), body)
@@ -356,6 +359,7 @@ if __name__ == "__main__":
 		" %a artist /"
 		" %b album /"
 		" %d song duration /"
+		" %e elapsed time /"
 		" %f base filename /"
 		" %n track number /"
 		" %p playlist position /"
